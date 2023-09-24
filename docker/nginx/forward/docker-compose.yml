@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  test_proxy:
+    image: test_proxy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test_proxy
+    ports:
+      - 3128:3128
+    volumes:
+      - ${NGINX_CONFIG_PATH}:/etc/nginx/nginx.conf:ro
+      - ${LOG_DRECTORY_PATH}:/logs/
+    environment:
+      - TZ=${TIMEZONE}
+    restart: always
